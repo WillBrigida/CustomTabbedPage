@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CustomTabbedPage.Controles.TabIndicatorView"
+    x:Name="Indicator"
+    BackgroundColor="Transparent">
+
+    <FlexLayout 
+        BindableLayout.ItemsSource="{Binding Items, Source={x:Reference Indicator}}"
+        JustifyContent="SpaceAround"
+        HorizontalOptions="FillAndExpand"
+        x:Name="myList">
+
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <Label 
+                   Text="{Binding Title}"
+                   HeightRequest="50"
+                   FontSize="13"
+                   TextColor="Red"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   Padding="15, 0">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer 
+                           Tapped="ChangeTab"
+                           CommandParameter="{Binding .}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </FlexLayout>
+
+    <BoxView 
+        HeightRequest="3"
+        WidthRequest="50"
+        VerticalOptions="End"
+        x:Name="activeIndicator"
+        HorizontalOptions="Start"
+        BackgroundColor="Black"/>
+
+</Grid>

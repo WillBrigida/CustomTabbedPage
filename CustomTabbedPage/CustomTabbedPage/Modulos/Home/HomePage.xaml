@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     xmlns:ctl="clr-namespace:CustomTabbedPage.Controles"
+    x:Name="MainPage"
+    x:Class="CustomTabbedPage.Modulos.Home.HomePage">
+
+    <!--conteudo barra de navegacao-->
+    <NavigationPage.TitleView>
+
+        <Grid 
+            HorizontalOptions="FillAndExpand">
+
+            <!--titulo page-->
+            <Label 
+                HorizontalOptions="Center"
+                Text="Locais"
+                FontSize="Title"
+                TextColor="Black"
+                VerticalOptions="CenterAndExpand"/>
+
+            <!--imagem perfil-->
+            <BoxView
+                Margin="0,0,10,0"
+                HorizontalOptions="End"
+                Grid.ColumnSpan="1"
+                CornerRadius="20"
+                HeightRequest="40"
+                WidthRequest="40"
+                BackgroundColor="Orange"/>
+
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <!--container principal-->
+    <StackLayout>
+
+
+        <!--navegacao horizontal-->
+        <StackLayout 
+                Orientation="Horizontal"
+                Margin="0, 0, 10, 0"
+                Spacing="0">
+
+            <ctl:TabIndicatorView 
+                    Items="{Binding ListaTabs}"
+                    BackgroundColor="{DynamicResource mainBackground}"
+                    CurrentItem="{Binding Item}">
+            </ctl:TabIndicatorView>
+
+        </StackLayout>
+
+
+        <BoxView
+            Margin="0,-5,0,0"
+            HeightRequest=".3"
+            BackgroundColor="Gray"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End"/>
+
+
+        <StackLayout VerticalOptions="FillAndExpand">
+            <CarouselView
+                ItemsSource="{Binding ListaTabs}"
+                CurrentItem="{Binding Item}"
+                VerticalScrollBarVisibility="Never"
+                HorizontalScrollBarVisibility="Never">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ScrollView>
+                            <FlexLayout
+                                HorizontalOptions="Center"
+                                BindableLayout.ItemsSource="{Binding BindingContext.Lista, Source={x:Reference MainPage }}"
+                                Direction="Column"
+                                Wrap="NoWrap">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout HeightRequest="100" BackgroundColor="Red">
+                                            <Label Text="{Binding Titulo}"/>
+                                        </StackLayout>
+
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+
+                            </FlexLayout>
+                        </ScrollView>
+
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </StackLayout>
+
+    </StackLayout>
+    
+</ContentPage>
